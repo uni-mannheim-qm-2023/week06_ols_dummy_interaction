@@ -1,10 +1,9 @@
 ---
-title: "QM 2022 Week 6: Hypothesis Testing, Dummies, and Interactions"
+title: "QM 2023 Week 6: Hypothesis Testing, Dummies, and Interactions"
 author: 
   - "Oliver Rittmann"
   - "Domantas Undzėnas"
-  - "Lion Behrens"
-date: "October 12 | 13 | 14, 2022"
+date: "October 12 | 13 , 2023"
 output:
   html_document:
     toc: yes
