@@ -51,8 +51,7 @@ p_needed <-
     "broom", # for tidy model output 
     "dagitty", # for the DAG in appendix
     "ggplot2",
-    "scales",
-    "equatiomatic" # to extract regression equations from models  
+    "scales"
     )
 
 # Now you check which packages are already installed on your computer.
@@ -169,9 +168,7 @@ axis(2, # add back y-axis
 > **How would you interpret the coefficients?**
 
 
-The regression equation may help: `r extract_eq(m1, intercept = "\\hat{\\beta}_0", use_coefs = TRUE, wrap = TRUE, greek = "\\hat{\\beta}", raw_tex = T)`
-
-<!-- This function comes from equatiomatic package. You can extract the regression equations in Latex from the model you specify. The equations won't always look perfect, but one way to use this package is to extract the equation, edit it, and paste the Latex code directly in the math mode (see more examples of this below). We have also used inline code here, instead of using a separate chunk. -->
+The regression equation may help: $\hat y = \hat\beta_0 + \hat\beta_1 * \text{education}$
 
 ### ggplot2 {-}
 
@@ -201,9 +198,9 @@ ggplot(data = dat1, aes(education, income)) +
 > **How would you interpret the coefficients?**
 
 
-The regression equation may help: `r extract_eq(m1, intercept = "\\hat{\\beta}_0", use_coefs = TRUE, wrap = TRUE, greek = "\\hat{\\beta}", raw_tex = T)`
+The regression equation may help: $\hat y = \hat\beta_0 + \hat\beta_1 * \text{education}$
 
-<!-- This function comes from equatiomatic package. You can extract the regression equations in Latex from the model you specify. The equations won't always look perfect, but one way to use this package is to extract the equation, edit it, and paste the Latex code directly in the math mode (see more examples of this below). We have also used inline code here, instead of using a separate chunk. -->
+
 
 # Statistical Inference for Regression Coefficents
 
@@ -881,7 +878,10 @@ Now run the model and interpret the coefficients. Remember that your recoding ma
 
 Consider the simple model from earlier, with education in years, without an interaction term again:
 
-`r extract_eq(m3, intercept = "\\hat{\\beta}_{0}", use_coefs = FALSE, greek = "\\hat{\\beta}", raw_tex = T)`
+$$
+\hat y = \hat\beta_0 + \hat\beta_1 * \text{education} + \hat\beta_2 * \text{female} 
+$$
+
 
 ```{r Exercise-III-model}
 tidy(m3)
@@ -920,29 +920,6 @@ You are very welcome to learn more about the handy things you may see in this la
 
 - doing references in RMarkdown on our [course website](https://qm-uma.netlify.app/misc/citations/) 
 - working in Latex Math mode to make nice regression equations with [equatiomatic](https://cran.r-project.org/web/packages/equatiomatic/vignettes/intro-equatiomatic.html) package   
-
-# Appendix {-}
-## Appendix I: DAG for Our Fake Data {-}
-
-Here you can find a DAG for the fake dataset we created for this lab. In this case, we explicitly worked with a case of interactions. As you can see, we are adding an interaction explicitly as a variable into the DAG, and this variable affects income. Yet we also assume that these is a direct effect of both *education* and *female* on income separately as well.
-
-```{r assumed-dag, fig.cap="Assumed Relationship in the Dataset", fig.dim=c(4,3)}
-
-dagitty('dag {
-bb="0,0,1,1"
-"Female * Education" [pos="0.3,0.45"]
-Education [exposure,pos="0.2,0.5"]
-Female [pos="0.25,0.4"]
-Income [outcome,pos="0.6,0.5"]
-"Female * Education" -> Income
-Education -> "Female * Education"
-Education -> Income
-Female -> "Female * Education"
-Female -> Income
-}
-') %>%
-  plot()
-```
 
 
 # References {-}
